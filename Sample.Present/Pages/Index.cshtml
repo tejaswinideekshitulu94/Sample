@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div>
+    <div id="displayMessage"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var url = "http://localhost:49430/api/HelloWorld/helloworld";
+        $.ajax({
+            type:"GET",
+            url: url,
+            success: function (data) {
+                if (data.length > 0) {
+                    var count = 1;
+                    $.each(data, function (index, value) {
+                        $("#displayMessage").append(count + "." + value+" ");
+                        count++;
+                    });
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
